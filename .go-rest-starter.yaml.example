@@ -1,0 +1,11 @@
+database:
+  player:
+    driver: "mysql"
+    write: "user:secret@tcp(127.0.0.1:3306)/test?charset=utf8&parseTime=true&loc=Local"
+    read: "secret:secret@tcp(127.0.0.1:3306)/test?charset=utf8&parseTime=true&loc=Local"
+    max_idle: 5
+    max_cons: 5
+
+sentry:
+  dsn : "http://851130bba8624fcdac45bd90104883ec:e0d9072fb7b540dcbbc39c7511a652fe@aad35881.ngrok.io/3"
+  timeout : 20

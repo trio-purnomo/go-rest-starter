@@ -1,0 +1,4 @@
+
+.go-rest-starter.yaml
+vendor/
+Gopkg.lock
