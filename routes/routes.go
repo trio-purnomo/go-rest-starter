@@ -21,6 +21,7 @@ func (r *Route) Init() *mux.Router {
 
 	v1.HandleFunc("/healthcheck", healthCheckController.HealthCheck).Methods("GET")
 	v1.HandleFunc("/player", playerController.StorePlayer).Methods("POST")
+	v1.HandleFunc("/player/{id}", playerController.GetPlayer).Methods("GET")
 
 	return v1
 }

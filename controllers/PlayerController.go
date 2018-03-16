@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 
+	"github.com/gorilla/mux"
 	"github.com/trio-purnomo/go-rest-starter/helpers"
 	"github.com/trio-purnomo/go-rest-starter/infrastructures"
 	"github.com/trio-purnomo/go-rest-starter/models"
@@ -51,5 +53,29 @@ func (p *PlayerController) StorePlayer(res http.ResponseWriter, req *http.Reques
 		helpers.Response(res, http.StatusBadRequest, "fail", err.Error())
 	}
 
+	return
+}
+
+//GetPlayer is
+func (p *PlayerController) GetPlayer(res http.ResponseWriter, req *http.Request) {
+	param := mux.Vars(req)
+	id, err := strconv.Atoi(param["id"])
+	if err != nil {
+		helpers.Response(res, http.StatusBadRequest, "fail", "Fail parse player id")
+		return
+	}
+
+	player, err := p.PlayerService.GetPlayer(id)
+	if err != nil {
+		helpers.Response(res, http.StatusBadRequest, "fail", err.Error())
+		return
+	}
+
+	if player.ID == 0 {
+		helpers.Response(res, http.StatusOK, "ok", "Player not found")
+		return
+	}
+
+	helpers.Response(res, http.StatusOK, "ok", player)
 	return
 }
